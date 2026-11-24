@@ -1,0 +1,59 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "registros_enviados": {
+    "a": {
+      "id": 1,
+      "chave_origem": "Cinemateca:linha:33143",
+      "ano": 1980,
+      "duracao_minutos": "20.000",
+      "tipo": "/ Sonoro / Não ficção",
+      "fonte": "Cinemateca",
+      "titulos": [
+        "abc brasil"
+      ],
+      "titulo_exibicao": "ABC, BRASIL",
+      "certificados": [
+        {
+          "papel": "nao_especificado",
+          "valor": "B0200000900000"
+        }
+      ],
+      "anos_declarados": [
+        1980
+      ],
+      "duracoes_declaradas": [
+        20.0
+      ]
+    },
+    "b": {
+      "id": 2,
+      "chave_origem": "ANCINE:linha:1",
+      "ano": 1980,
+      "duracao_minutos": "18.500",
+      "tipo": "DOCUMENTÁRIO",
+      "fonte": "ANCINE",
+      "titulos": [
+        "abc brasil"
+      ],
+      "titulo_exibicao": "ABC BRASIL",
+      "certificados": [
+        {
+          "papel": "obra",
+          "valor": "B0200000900000"
+        }
+      ],
+      "anos_declarados": [
+        1980
+      ],
+      "duracoes_declaradas": [
+        18.5
+      ]
+    }
+  },
+  "resposta": "**Resumo**\nComparação dos registros \"a\" (Cinemateca) e \"b\" (ANCINE) para o título \"abc brasil\".\n\n**Compatibilidades**\n- Títulos: Coincidem em \"abc brasil\" / \"ABC, BRASIL\" / \"ABC BRASIL\".\n- Anos declarados: Ambos registram 1980 (campos `ano` e `anos_declarados`).\n- Certificado: O valor do certificado `B0200000900000` é idêntico em ambas as fontes.\n\n**Divergências**\n- Duração: Divergem entre 20 minutos (Cinemateca, `duracao_minutos`: \"20.000\") e 18,5 minutos (ANCINE, `duracao_minutos`: \"18.500\").\n- Tipo: Divergem na tipologia informada (`/ Sonoro / Não ficção` vs. `DOCUMENTÁRIO`).\n- Papel do certificado: A Cinemateca define como `nao_especificado`, enquanto a ANCINE atribui o papel de `obra`.\n- Formatação do título de exibição: Diferem no uso de maiúsculas e pontuação.\n\n**Informações Ausentes**\n- Ausência de dados sobre série/episódio em ambos os registros, o que não comprova se a obra é seriada ou não.\n- Não constam equipes técnicas, sinopses ou datas de lançamento oficiais (apenas anos declarados).\n\n**Sugestão de Conferência Humana**\nVerificar a metragem/suporte original para esclarecer a divergência de duração (20 min vs. 18,5 min) e confirmar se a variação tipológica decorre de critérios divergentes de indexação entre as fontes. Os campos utilizados foram `titulos`, `titulo_exibicao`, `ano`, `anos_declarados`, `duracao_minutos`, `tipo`, `fonte` e `certificados`.",
+  "nota": "Resposta gerada pelo modelo; exige conferência humana. Nenhum vínculo foi alterado.",
+  "verificado_em": "2026-11-23T04:49:17.908569+00:00",
+  "inferencia_real": true,
+  "forma_verificacao": "Chamada real da função usada pelo endpoint da aplicação; sem resposta simulada."
+}

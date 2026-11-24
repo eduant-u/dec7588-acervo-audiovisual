@@ -1,0 +1,10 @@
+{
+  "natureza": "Amostra real dirigida para demonstração acadêmica; não representa estatisticamente o acervo.",
+  "execucao": "hierarquia_20261117_214256_cpb_empirico",
+  "sha256_base": "f9b6e8c19ba0ba58cf4642fae31d6ec8c54fff36517c8b1b321233eb20c028b3",
+  "extraida_em": "2026-11-21T18:38:34.873726+00:00",
+  "registros": 293,
+  "entidades": 191,
+  "criterio": "80 entidades com ambas as fontes; 20 relações episódio/série; 20 registros iniciais por fonte; até 24 pares com decisão humana. Entidades repetidas são deduplicadas.",
+  "sha256_amostra": "c06dbbce2d260a7dfcb572f9c85e4f9986ea6c786265236de2befeb5f0aff895"
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Acervo audiovisual</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<a class="skip" href="#main">Ir para o conteúdo</a>
+<header><a class="brand" href="/">Acervo audiovisual <span>Obras, pessoas e empresas</span></a><span id="connection">Conectando…</span></header>
+<nav aria-label="Áreas do sistema"><button data-view="records" aria-current="page">Cadastros</button><button data-view="reports">Consultas e gráficos</button><button data-view="ai">Comparar com IA</button><button data-view="database">Banco de dados</button><button data-view="sql">SQL</button></nav>
+<main id="main" tabindex="-1">
+<div id="notice" role="status" hidden></div>
+<section id="records" class="view">
+ <div class="heading"><div><p class="eyebrow">GERENCIAMENTO DO ACERVO</p><h1>Cadastros</h1></div><button id="new" class="primary" disabled>Novo registro</button></div>
+ <div class="toolbar"><label>Tabela<select id="table"></select></label><form id="searchForm"><label>Buscar nesta tabela<input id="search" type="search" placeholder="Nome, título, identificador…"></label><button class="secondary">Buscar</button></form></div>
+ <p class="muted" id="summary" aria-live="polite"></p>
+ <div id="tableWrap" class="table-wrap" aria-busy="false"></div>
+ <div class="pagination"><button id="prev" class="secondary">Anterior</button><span id="pageInfo"></span><button id="next" class="secondary">Próxima</button></div>
+</section>
+<section id="reports" class="view" hidden>
+ <div class="heading"><div><p class="eyebrow">ANÁLISE DA AMOSTRA</p><h1>Consultas e gráficos</h1></div></div>
+ <label class="query-select">Consulta<select id="reportSelect"><option value="0">1. Obras por década e fonte</option><option value="1">2. Empresas e papéis declarados</option><option value="2">3. Obras com CPB por fonte e papel</option></select></label>
+ <h2 id="reportTitle"></h2><p id="reportObjective"></p><p class="muted" id="reportNote"></p><div id="chart" class="chart-wrap"></div><p id="reportUnit" class="muted"></p><div id="reportTable" class="table-wrap"></div>
+ <details><summary>Ver SQL da consulta</summary><pre id="reportSql"></pre></details>
+</section>
+<section id="ai" class="view" hidden>
+ <div class="heading"><div><p class="eyebrow">APOIO À REVISÃO HUMANA</p><h1>Comparar registros com IA</h1></div></div>
+ <p>Escolha dois registros para comparar as informações. A IA aponta o que combina, o que diverge e o que precisa ser conferido.</p>
+ <form id="aiForm" class="panel">
+  <p id="keyStatus" class="muted" role="status"></p>
+  <div class="form-grid"><label>Registro A<select id="aiA" required></select></label><label>Registro B<select id="aiB" required></select></label><label>Provedor<select id="provider"><option value="gemini">Gemini</option><option value="openai">OpenAI</option><option value="ollama">Ollama local</option></select></label><label>Modelo<input id="model" required placeholder="Nome do modelo"></label><label id="keyLabel" class="wide">Chave da API<input id="apiKey" type="password" autocomplete="off" placeholder="Sua chave, se ainda não estiver configurada"></label></div>
+  <p class="muted">A comparação usa títulos, anos, durações, fontes e certificados. Sua chave não é salva pelo formulário.</p>
+  <div class="actions"><button type="button" id="previewAi" class="secondary">Conferir os dados</button><button id="runAi" class="primary">Gerar comparação</button></div>
+ </form>
+ <details id="aiPreview" hidden><summary>Dados selecionados</summary><pre id="aiData"></pre></details>
+ <div id="aiResult" class="panel" hidden><h2>Resultado da comparação</h2><p id="aiModel" class="muted"></p><div id="aiText" class="prose"></div><p class="muted">Confira os registros antes de decidir. A comparação não altera os dados.</p></div>
+</section>
+<section id="database" class="view" hidden>
+ <div class="heading"><div><p class="eyebrow">CONFIGURAÇÕES</p><h1>Banco de dados</h1></div></div>
+ <p>Gerencie as tabelas e os dados do acervo.</p>
+ <div class="panel"><h2>Preparar banco</h2><p>Crie as tabelas e importe os dados iniciais. A importação fica disponível quando o acervo está vazio.</p><div class="actions"><button id="initDb" class="secondary">Criar tabelas</button><button id="seedDb" class="primary">Importar dados</button><a class="button secondary" href="/api/export-ddl" download="01_schema.sql">Baixar estrutura SQL</a></div></div>
+ <div class="panel"><h2>Dados importados</h2><p id="manifestText" class="muted"></p><details><summary>Detalhes do arquivo</summary><pre id="manifest"></pre></details></div>
+ <div class="panel danger-zone"><h2>Apagar todas as tabelas</h2><p>Isso apaga todas as tabelas e todos os dados do acervo. Esta ação não pode ser desfeita.</p><form id="dropForm"><label>Para confirmar, digite ELIMINAR TABELAS<input id="dropConfirmation" required autocomplete="off" placeholder="ELIMINAR TABELAS"></label><button class="danger">Apagar tabelas</button></form></div>
+</section>
+<section id="sql" class="view" hidden>
+ <div class="heading"><div><p class="eyebrow">CONSULTAS E ESTRUTURA</p><h1>SQL</h1></div></div>
+ <p>Copie as consultas para usar no pgAdmin ou baixe os arquivos.</p>
+ <div class="actions"><a class="button primary" href="/api/export-sql-rapido" download="CONSULTAS_PGADMIN.sql">Baixar consultas</a><a class="button secondary" href="/api/export-ddl" download="01_schema.sql">Baixar estrutura completa</a></div>
+ <div id="sqlSnippets" aria-busy="false"></div>
+ <details><summary>Ver estrutura completa comentada</summary><pre id="ddlSql" tabindex="0"></pre></details>
+</section>
+</main>
+<footer>Acervo audiovisual <span>Dados da ANCINE e da Cinemateca Brasileira</span></footer>
+<dialog id="editor" aria-labelledby="editorTitle"><form id="editForm"><div class="dialog-heading"><h2 id="editorTitle">Novo registro</h2><button type="button" id="closeEditor" aria-label="Fechar formulário" class="secondary">Fechar</button></div><p id="editorHint" class="muted">Preencha os campos marcados com *.</p><div id="fields" class="form-grid"></div><p id="formError" class="error" role="alert" hidden></p><div class="dialog-actions"><button type="button" id="cancelEditor" class="secondary">Cancelar</button><button id="save" class="primary">Salvar</button></div></form></dialog>
+</body></html>
+

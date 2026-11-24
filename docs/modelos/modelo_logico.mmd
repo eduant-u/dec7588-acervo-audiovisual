@@ -1,0 +1,157 @@
+erDiagram
+    FONTE_DADOS {
+        bigint id PK
+        character_varying nome
+        text url
+        text descricao
+    }
+    LOTE_IMPORTACAO {
+        bigint id PK
+        bigint fonte_id FK
+        character_varying nome
+        character_varying sha256
+        timestamp_with_time_zone data_importacao
+        text observacao
+    }
+    TIPO_OBRA {
+        bigint id PK
+        character_varying nome
+        text descricao
+    }
+    OBRA {
+        bigint id PK
+        text chave_tcc
+        text titulo_referencia
+        character_varying nivel
+        character_varying status
+        text observacao
+    }
+    REGISTRO_FONTE {
+        bigint id PK
+        bigint obra_id FK
+        bigint lote_id FK
+        bigint tipo_obra_id FK
+        text chave_origem
+        text identificador_fonte
+        integer ano
+        numeric duracao_minutos
+        jsonb original_json
+        jsonb perfil_json
+        jsonb proveniencia_json
+        text observacao
+    }
+    TITULO {
+        bigint id PK
+        bigint registro_id FK
+        text valor
+        character_varying tipo
+    }
+    CERTIFICADO {
+        bigint id PK
+        bigint registro_id FK
+        character_varying numero
+        character_varying esquema
+        character_varying papel
+        date data_emissao
+        text situacao
+    }
+    PESSOA {
+        bigint id PK
+        bigint fonte_id FK
+        text nome
+        text observacao
+    }
+    EMPRESA {
+        bigint id PK
+        bigint fonte_id FK
+        text nome
+        character_varying cnpj
+        character_varying uf
+        text municipio
+        text observacao
+    }
+    FUNCAO_CREDITO {
+        bigint id PK
+        character_varying nome
+        text descricao
+    }
+    CREDITO_PESSOA {
+        bigint id PK
+        bigint registro_id FK
+        bigint pessoa_id FK
+        bigint funcao_id FK
+        text personagem
+        text evidencia
+    }
+    PARTICIPACAO_EMPRESA {
+        bigint id PK
+        bigint registro_id FK
+        bigint empresa_id FK
+        character_varying papel
+        text evidencia
+    }
+    PAIS {
+        bigint id PK
+        character_varying nome
+    }
+    OBRA_PAIS {
+        bigint id PK
+        bigint registro_id FK
+        bigint pais_id FK
+        text evidencia
+    }
+    GENERO {
+        bigint id PK
+        character_varying nome
+    }
+    OBRA_GENERO {
+        bigint id PK
+        bigint registro_id FK
+        bigint genero_id FK
+    }
+    CARACTERISTICA_TECNICA {
+        bigint id PK
+        bigint registro_id FK
+        character_varying nome
+        text valor
+        character_varying unidade
+    }
+    RELACAO_OBRA {
+        bigint id PK
+        bigint origem_id FK
+        bigint destino_id FK
+        character_varying tipo
+        character_varying status
+        jsonb evidencia_json
+    }
+    DECISAO_INTEGRACAO {
+        bigint id PK
+        bigint registro_a_id FK
+        bigint registro_b_id FK
+        character_varying parecer
+        text justificativa
+        character_varying responsavel
+        timestamp_with_time_zone data_decisao
+    }
+    FONTE_DADOS ||--o{ LOTE_IMPORTACAO : fonte_id
+    OBRA ||--o{ REGISTRO_FONTE : obra_id
+    LOTE_IMPORTACAO ||--o{ REGISTRO_FONTE : lote_id
+    TIPO_OBRA |o--o{ REGISTRO_FONTE : tipo_obra_id
+    REGISTRO_FONTE ||--o{ TITULO : registro_id
+    REGISTRO_FONTE ||--o{ CERTIFICADO : registro_id
+    FONTE_DADOS ||--o{ PESSOA : fonte_id
+    FONTE_DADOS ||--o{ EMPRESA : fonte_id
+    REGISTRO_FONTE ||--o{ CREDITO_PESSOA : registro_id
+    PESSOA ||--o{ CREDITO_PESSOA : pessoa_id
+    FUNCAO_CREDITO ||--o{ CREDITO_PESSOA : funcao_id
+    REGISTRO_FONTE ||--o{ PARTICIPACAO_EMPRESA : registro_id
+    EMPRESA ||--o{ PARTICIPACAO_EMPRESA : empresa_id
+    REGISTRO_FONTE ||--o{ OBRA_PAIS : registro_id
+    PAIS ||--o{ OBRA_PAIS : pais_id
+    REGISTRO_FONTE ||--o{ OBRA_GENERO : registro_id
+    GENERO ||--o{ OBRA_GENERO : genero_id
+    REGISTRO_FONTE ||--o{ CARACTERISTICA_TECNICA : registro_id
+    OBRA ||--o{ RELACAO_OBRA : origem_id
+    OBRA ||--o{ RELACAO_OBRA : destino_id
+    REGISTRO_FONTE ||--o{ DECISAO_INTEGRACAO : registro_a_id
+    REGISTRO_FONTE ||--o{ DECISAO_INTEGRACAO : registro_b_id

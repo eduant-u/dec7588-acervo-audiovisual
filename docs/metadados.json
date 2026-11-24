@@ -1,0 +1,1014 @@
+[
+  {
+    "name": "fonte_dados",
+    "label": "Fontes de dados",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 160,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "url",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "descricao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 2
+  },
+  {
+    "name": "lote_importacao",
+    "label": "Lotes de importação",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "fonte_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "fonte_dados",
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 240,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "sha256",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 64,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "data_importacao",
+        "type": "timestamp with time zone",
+        "required": false,
+        "default": "CURRENT_TIMESTAMP",
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "observacao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 2
+  },
+  {
+    "name": "tipo_obra",
+    "label": "Tipos de obra",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 200,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "descricao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 24
+  },
+  {
+    "name": "obra",
+    "label": "Obras audiovisuais",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "chave_tcc",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "titulo_referencia",
+        "type": "text",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "nivel",
+        "type": "character varying",
+        "required": false,
+        "default": "'obra'::character varying",
+        "max_length": 40,
+        "target": null,
+        "options": [
+          "obra",
+          "serie",
+          "episodio",
+          "temporada",
+          "nao_especificado"
+        ]
+      },
+      {
+        "name": "status",
+        "type": "character varying",
+        "required": false,
+        "default": "'cadastrada'::character varying",
+        "max_length": 80,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "observacao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 191
+  },
+  {
+    "name": "registro_fonte",
+    "label": "Registros das fontes",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "obra_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "obra",
+        "options": null
+      },
+      {
+        "name": "lote_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "lote_importacao",
+        "options": null
+      },
+      {
+        "name": "tipo_obra_id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": "tipo_obra",
+        "options": null
+      },
+      {
+        "name": "chave_origem",
+        "type": "text",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "identificador_fonte",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "ano",
+        "type": "integer",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "duracao_minutos",
+        "type": "numeric",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "original_json",
+        "type": "jsonb",
+        "required": false,
+        "default": "'{}'::jsonb",
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "perfil_json",
+        "type": "jsonb",
+        "required": false,
+        "default": "'{}'::jsonb",
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "proveniencia_json",
+        "type": "jsonb",
+        "required": false,
+        "default": "'{}'::jsonb",
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "observacao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 293
+  },
+  {
+    "name": "titulo",
+    "label": "Títulos",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "valor",
+        "type": "text",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "tipo",
+        "type": "character varying",
+        "required": false,
+        "default": "'declarado'::character varying",
+        "max_length": 40,
+        "target": null,
+        "options": [
+          "declarado",
+          "alternativo",
+          "chave_normalizada"
+        ]
+      }
+    ],
+    "count": 647
+  },
+  {
+    "name": "certificado",
+    "label": "Certificados",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "numero",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 160,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "esquema",
+        "type": "character varying",
+        "required": false,
+        "default": "'CPB'::character varying",
+        "max_length": 80,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "papel",
+        "type": "character varying",
+        "required": false,
+        "default": "'nao_especificado'::character varying",
+        "max_length": 60,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "data_emissao",
+        "type": "date",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "situacao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 239
+  },
+  {
+    "name": "pessoa",
+    "label": "Pessoas",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "fonte_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "fonte_dados",
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "text",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "observacao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 1864
+  },
+  {
+    "name": "empresa",
+    "label": "Empresas",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "fonte_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "fonte_dados",
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "text",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "cnpj",
+        "type": "character varying",
+        "required": false,
+        "default": null,
+        "max_length": 32,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "uf",
+        "type": "character varying",
+        "required": false,
+        "default": null,
+        "max_length": 2,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "municipio",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "observacao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 268
+  },
+  {
+    "name": "funcao_credito",
+    "label": "Funções de crédito",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 160,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "descricao",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 8
+  },
+  {
+    "name": "credito_pessoa",
+    "label": "Créditos de pessoas",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "pessoa_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "pessoa",
+        "options": null
+      },
+      {
+        "name": "funcao_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "funcao_credito",
+        "options": null
+      },
+      {
+        "name": "personagem",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "evidencia",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 2340
+  },
+  {
+    "name": "participacao_empresa",
+    "label": "Participações de empresas",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "empresa_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "empresa",
+        "options": null
+      },
+      {
+        "name": "papel",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 80,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "evidencia",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 337
+  },
+  {
+    "name": "pais",
+    "label": "Países",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 200,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 2
+  },
+  {
+    "name": "obra_pais",
+    "label": "Países de produção",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "pais_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "pais",
+        "options": null
+      },
+      {
+        "name": "evidencia",
+        "type": "text",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 158
+  },
+  {
+    "name": "genero",
+    "label": "Gêneros",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 200,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 30
+  },
+  {
+    "name": "obra_genero",
+    "label": "Gêneros por registro",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "genero_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "genero",
+        "options": null
+      }
+    ],
+    "count": 151
+  },
+  {
+    "name": "caracteristica_tecnica",
+    "label": "Características técnicas",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "nome",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 120,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "valor",
+        "type": "text",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "unidade",
+        "type": "character varying",
+        "required": false,
+        "default": null,
+        "max_length": 80,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 432
+  },
+  {
+    "name": "relacao_obra",
+    "label": "Relações entre obras",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "origem_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "obra",
+        "options": null
+      },
+      {
+        "name": "destino_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "obra",
+        "options": null
+      },
+      {
+        "name": "tipo",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 100,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "status",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 120,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "evidencia_json",
+        "type": "jsonb",
+        "required": false,
+        "default": "'{}'::jsonb",
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 30
+  },
+  {
+    "name": "decisao_integracao",
+    "label": "Decisões de integração",
+    "fields": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "required": false,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "registro_a_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "registro_b_id",
+        "type": "bigint",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": "registro_fonte",
+        "options": null
+      },
+      {
+        "name": "parecer",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 40,
+        "target": null,
+        "options": [
+          "mesma_obra",
+          "obras_distintas",
+          "incerto",
+          "episodio_da_serie"
+        ]
+      },
+      {
+        "name": "justificativa",
+        "type": "text",
+        "required": true,
+        "default": null,
+        "max_length": null,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "responsavel",
+        "type": "character varying",
+        "required": true,
+        "default": null,
+        "max_length": 200,
+        "target": null,
+        "options": null
+      },
+      {
+        "name": "data_decisao",
+        "type": "timestamp with time zone",
+        "required": false,
+        "default": "CURRENT_TIMESTAMP",
+        "max_length": null,
+        "target": null,
+        "options": null
+      }
+    ],
+    "count": 24
+  }
+]

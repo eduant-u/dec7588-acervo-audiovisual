@@ -1,0 +1,242 @@
+[
+  {
+    "titulo": "Obras por década e fonte",
+    "objetivo": "Contar as obras descritas por cada fonte em cada década. Uma obra nas duas fontes participa de ambas as séries.",
+    "unidade": "obras distintas por fonte e década",
+    "nota": "Amostra dirigida. Não representa a distribuição do acervo completo.",
+    "sql": "SELECT f.nome AS fonte, (r.ano/10)*10 AS decada,\n COUNT(DISTINCT o.id) AS total_obras\nFROM audiovisual.obra o\nJOIN audiovisual.registro_fonte r ON r.obra_id=o.id\nJOIN audiovisual.lote_importacao l ON l.id=r.lote_id\nJOIN audiovisual.fonte_dados f ON f.id=l.fonte_id\nWHERE r.ano IS NOT NULL\nGROUP BY f.nome,(r.ano/10)*10\nORDER BY decada,fonte;",
+    "rows": [
+      {
+        "fonte": "Cinemateca",
+        "decada": 1900,
+        "total_obras": 2
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 1930,
+        "total_obras": 1
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 1930,
+        "total_obras": 2
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 1940,
+        "total_obras": 2
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 1940,
+        "total_obras": 16
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 1950,
+        "total_obras": 4
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 1950,
+        "total_obras": 4
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 1960,
+        "total_obras": 5
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 1960,
+        "total_obras": 6
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 1970,
+        "total_obras": 7
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 1970,
+        "total_obras": 6
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 1980,
+        "total_obras": 5
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 1980,
+        "total_obras": 5
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 1990,
+        "total_obras": 9
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 1990,
+        "total_obras": 7
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 2000,
+        "total_obras": 78
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 2000,
+        "total_obras": 72
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 2010,
+        "total_obras": 20
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 2010,
+        "total_obras": 20
+      },
+      {
+        "fonte": "ANCINE",
+        "decada": 2020,
+        "total_obras": 2
+      },
+      {
+        "fonte": "Cinemateca",
+        "decada": 2020,
+        "total_obras": 1
+      }
+    ],
+    "index": 0
+  },
+  {
+    "titulo": "Empresas e papéis declarados",
+    "objetivo": "Identificar as empresas com mais obras na amostra, separando o papel de requerente do de produtora.",
+    "unidade": "obras distintas por empresa e papel",
+    "nota": "Nomes literais por fonte; não foi realizada desambiguação de empresas homônimas.",
+    "sql": "SELECT e.nome AS empresa, p.papel, COUNT(DISTINCT r.obra_id) AS total_obras\nFROM audiovisual.empresa e\nJOIN audiovisual.participacao_empresa p ON p.empresa_id=e.id\nJOIN audiovisual.registro_fonte r ON r.id=p.registro_id\nJOIN audiovisual.obra o ON o.id=r.obra_id\nGROUP BY e.id,e.nome,p.papel\nORDER BY total_obras DESC,empresa,p.papel\nLIMIT 15;",
+    "rows": [
+      {
+        "empresa": "CENTRO TÉCNICO AUDIOVISUAL / MINISTÉRIO DA CULTURA",
+        "papel": "requerente",
+        "total_obras": 6
+      },
+      {
+        "empresa": "Canal Azul Produções Culturais Ltda.",
+        "papel": "produtora",
+        "total_obras": 4
+      },
+      {
+        "empresa": "Filmart Produções Artísticas SC Ltda.",
+        "papel": "produtora",
+        "total_obras": 4
+      },
+      {
+        "empresa": "B e T Audiovisual",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "Companhia Cinematográfica Maristela",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "FUTURA FILMES LTDA. ME.",
+        "papel": "requerente",
+        "total_obras": 3
+      },
+      {
+        "empresa": "Filmes do Equador Ltda.",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "Futura Filmes",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "Globo Filmes",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "INCE - Instituto Nacional de Cinema Educativo",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "L.C. Barreto",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "Magno e Magno Ltda.",
+        "papel": "produtora",
+        "total_obras": 3
+      },
+      {
+        "empresa": "PA PRODUTORES ASSOCIADOS LTDA",
+        "papel": "requerente",
+        "total_obras": 3
+      },
+      {
+        "empresa": "13 PRODUÇÕES E LOCAÇÕES LTDA-ME",
+        "papel": "requerente",
+        "total_obras": 2
+      },
+      {
+        "empresa": "13 Produções e Locações",
+        "papel": "produtora",
+        "total_obras": 2
+      }
+    ],
+    "index": 1
+  },
+  {
+    "titulo": "Obras com CPB por fonte e papel",
+    "objetivo": "Contar obras com CPB, preservando a distinção entre certificado próprio, da série e do episódio.",
+    "unidade": "obras distintas por fonte e papel do CPB",
+    "nota": "Uma obra pode participar de mais de uma categoria. As contagens não devem ser somadas como total único.",
+    "sql": "SELECT f.nome AS fonte,c.papel,COUNT(DISTINCT r.obra_id) AS total_obras\nFROM audiovisual.certificado c\nJOIN audiovisual.registro_fonte r ON r.id=c.registro_id\nJOIN audiovisual.lote_importacao l ON l.id=r.lote_id\nJOIN audiovisual.fonte_dados f ON f.id=l.fonte_id\nWHERE c.esquema='CPB'\nGROUP BY f.nome,c.papel\nORDER BY fonte,papel;",
+    "rows": [
+      {
+        "fonte": "ANCINE",
+        "papel": "obra",
+        "total_obras": 109
+      },
+      {
+        "fonte": "ANCINE",
+        "papel": "serie",
+        "total_obras": 24
+      },
+      {
+        "fonte": "Cinemateca",
+        "papel": "episodio",
+        "total_obras": 27
+      },
+      {
+        "fonte": "Cinemateca",
+        "papel": "nao_especificado",
+        "total_obras": 49
+      },
+      {
+        "fonte": "Cinemateca",
+        "papel": "parental_por_contexto",
+        "total_obras": 5
+      },
+      {
+        "fonte": "Cinemateca",
+        "papel": "serie",
+        "total_obras": 12
+      }
+    ],
+    "index": 2
+  }
+]
